@@ -1,0 +1,594 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Paper for reviewers %
+%%%%%%%%%%%%%%%%%%%%%%%
+%\documentclass[10pt, draftcls, onecolumn, peerreviewca]{IEEEtran}
+\documentclass[10pt, onecolumn,conference]{IEEEtran}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\singlespacing
+%\onehalfspacing
+%\doublespacing
+%\setstretch{1.1}
+%%%%%%%%%%%%%%%%%%%%%%%
+% Final paper         %
+%%%%%%%%%%%%%%%%%%%%%%%
+%\documentclass[10pt, twocolumn, conference]{IEEEtran}
+
+% *** MISC UTILITY PACKAGES ***
+%
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+
+\usepackage{subfigure}
+\usepackage{float}
+\usepackage{balance}
+
+\usepackage{multirow}
+
+% *** CITATION PACKAGES ***
+\usepackage{cite}
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+
+\ifCLASSINFOpdf
+  \usepackage[pdftex]{graphicx}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  \usepackage[dvips]{graphicx}
+\fi
+
+
+% *** MATH PACKAGES ***
+\usepackage[cmex10]{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amscd}
+\usepackage{amssymb}
+\usepackage{units} 
+
+
+%\usepackage{algorithmic}
+
+
+% *** ALIGNMENT PACKAGES ***
+%\usepackage{array}
+%\usepackage{mdwmath}
+%\usepackage{mdwtab}
+%\usepackage{eqparbox}
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+% *** SUBFIGURE PACKAGES ***
+%\usepackage[tight,footnotesize]{subfigure}
+%\usepackage[caption=false]{caption}
+%\usepackage[font=footnotesize]{subfig}
+% subfig.sty, also written by Steven Douglas Cochran, is the modern
+% replacement for subfigure.sty. However, subfig.sty requires and
+% automatically loads Axel Sommerfeldt's caption.sty which will override
+% IEEEtran.cls handling of captions and this will result in nonIEEE style
+% figure/table captions. To prevent this problem, be sure and preload
+% caption.sty with its "caption=false" package option. This is will preserve
+% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later 
+% (recommended due to many improvements over 1.2) of subfig.sty supports
+% the caption=false option directly:
+%\usepackage[caption=false,font=footnotesize]{subfig}
+
+
+% *** FLOAT PACKAGES ***
+\usepackage{fixltx2e}
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/sttools/
+% Documentation is contained in the stfloats.sty comments as well as in the
+% presfull.pdf file. Do not use the stfloats baselinefloat ability as IEEE
+% does not allow \baselineskip to stretch. Authors submitting work to the
+% IEEE should note that IEEE rarely uses double column equations and
+% that authors should try to avoid such use. Do not be tempted to use the
+% cuted.sty or midfloat.sty packages (also by Sigitas Tolusis) as IEEE does
+% not format its papers in such ways.
+
+
+%\ifCLASSOPTIONcaptionsoff
+%  \usepackage[nomarkers]{endfloat}
+% \let\MYoriglatexcaption\caption
+% \renewcommand{\caption}[2][\relax]{\MYoriglatexcaption[#2]{#2}}
+%\fi
+% endfloat.sty was written by James Darrell McCauley and Jeff Goldberg.
+% This package may be useful when used in conjunction with IEEEtran.cls'
+% captionsoff option. Some IEEE journals/societies require that submissions
+% have lists of figures/tables at the end of the paper and that
+% figures/tables without any captions are placed on a page by themselves at
+% the end of the document. If needed, the draftcls IEEEtran class option or
+% \CLASSINPUTbaselinestretch interface can be used to increase the line
+% spacing as well. Be sure and use the nomarkers option of endfloat to
+% prevent endfloat from "marking" where the figures would have been placed
+% in the text. The two hack lines of code above are a slight modification of
+% that suggested by in the endfloat docs (section 8.3.1) to ensure that
+% the full captions always appear in the list of figures/tables - even if
+% the user used the short optional argument of \caption[]{}.
+% IEEE papers do not typically make use of \caption[]'s optional argument,
+% so this should not be an issue. A similar trick can be used to disable
+% captions of packages such as subfig.sty that lack options to turn off
+% the subcaptions:
+% For subfig.sty:
+% \let\MYorigsubfloat\subfloat
+% \renewcommand{\subfloat}[2][\relax]{\MYorigsubfloat[]{#2}}
+% For subfigure.sty:
+% \let\MYorigsubfigure\subfigure
+% \renewcommand{\subfigure}[2][\relax]{\MYorigsubfigure[]{#2}}
+% However, the above trick will not work if both optional arguments of
+% the \subfloat/subfig command are used. Furthermore, there needs to be a
+% description of each subfigure *somewhere* and endfloat does not add
+% subfigure captions to its list of figures. Thus, the best approach is to
+% avoid the use of subfigure captions (many IEEE journals avoid them anyway)
+% and instead reference/explain all the subfigures within the main caption.
+% The latest version of endfloat.sty and its documentation can obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/endfloat/
+%
+% The IEEEtran \ifCLASSOPTIONcaptionsoff conditional can also be used
+% later in the document, say, to conditionally put the References on a 
+% page by themselves.
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+\usepackage{url}
+\usepackage{color}
+
+% Symbols
+\usepackage{gensymb}
+\usepackage{epstopdf}
+\usepackage{multirow}
+
+% New commands
+\newcommand{\figref}[1]{Fig.~\ref{#1}}  % Cross-reference of figures
+\newcommand{\tabref}[1]{Table~\ref{#1}}  % Cross-reference of tables
+\newcommand{\secref}[1]{section~\ref{#1}}  % Cross-reference of equations
+\newcommand{\equref}[1]{(\ref{#1})}  % Cross-reference of equations
+\newcommand{\tabscale}{0.8333}
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\begin{document}
+\title{ \Large{Semiconductor Conduction Losses Prediction Considering the Current Ripple in a Three-Phase Two-Level Voltage Source Converter Driven by Different PWM Strategies}}
+
+ \maketitle
+ 
+%\begin{abstract}
+%The choice of topologies, modulation strategies and semiconductors is a process that requires appropriatte tools to design a converter and to evaluate the technology to be employed. Typically, simulations are used to increase the precision during the analysis process of power converters. Theoretical tools to analyze three-phase voltage source converters (VSC) are given in depth in the bibliography, but some analyzes are based on simplifications and better results can still be determined. Applications of the VSC other than for power factor correction (PFC), such as drives applications, active filters, wind energy conversion, among others, require better theoretical results since most of the simplications are considered for PFC operation. Thus, a detailed analysis of the operation conditions has to be considered, which includes displacement angles, resistive voltage drops in wires and current ripples. In this work a detailed analysis of the current ripples in the phase current and in the semiconductor is presented for different PWM strategies. The switch models are considered for the most typical modern implementations, i.e., IGBT/diode and SiC MOSFET. A detailed comparison of the results for different PWM strategies and operation conditions is presented in order to highlight the improved accuracy of the proposed analysis.
+%\end{abstract}
+%
+%\begin{keywords}
+% Power Factor Correction, PWM rectifiers, multi-state switching cells, high efficiency.
+\end{keywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{{\MakeUppercase{Introduction}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ The choice of topologies, modulation strategies and semiconductors is a process that requires appropriatte tools to design a converter and to evaluate the technology to be employed. Typically, simulations are used to increase the precision during the analysis process of power converters \cite{Kolar-04, Kolar-05, Liu-01}. Theoretical tools to analyze three-phase voltage source converters (VSC) (cf. Fig.~\ref{fig1}(a)) are given in depth in \cite{Kolar-06, Lipo-02}, but some analyzes are based on simplifications and better results can still be determined. Recent research in this subject \cite{Wang-02} has presented a prediction of the current ripple in the phase current of a VSC, which has been employed to operate the VSC with variable frequency \cite{Wang-03}.
+
+Applications of the VSC other than for power factor correction (PFC), such as drives applications, active filters, wind energy conversion, among others, require better theoretical results since most of the simplications are considered for PFC operation. Thus, a detailed analysis of the operation conditions has to be considered, which includes displacement angles, resistive voltage drops in wires and current ripples. In this work a detailed analysis of the current ripples in the phase current and in the semiconductor is presented for different PWM strategies. This is done considering the equivalent circuit of the VSC presented in Fig.~\ref{fig1}(b), which takes into account the displacement angles and resistive voltage drops. The switch models are considered for the most typical modern implementations, i.e., IGBT/diode  and SiC MOSFET. A detailed comparison of the results for different PWM strategies and operation conditions is presented in order to highlight the improved accuracy of the proposed analysis.
+
+\begin{figure*}[bp!]
+	\centering
+	\includegraphics[scale=1]{figuras/fig1}
+	\caption{{(a) Three-phase two-level voltage source converter (VSC) topology; (b) Equivalent circuit diagram of the VSC including the ac-port resistive losses; and, (c) Voltage space vectors, their correspondents switching states and sextants ($S_{\textrm{I}}$, $S_{\textrm{II}}$, $S_{\textrm{III}}$, $S_{\textrm{IV}}$, $S_{\textrm{V}}$ and $S_{\textrm{VI}}$) definition . In the voltage space vector, the voltage vectors are related with the $\alpha\beta$ duty-cycle functions with $\vec{d}_{\alpha\beta}V_{dc}\!=\!d_1\vec{V}_1\!+\!d_2\vec{V}_2$ for sextant $S_\textrm{I}$, the others sextants follow a similar relation, where $d_j$ is the correspondent duty-cycle function for vector $\vec{V}_j$.}}
+	\label{fig1}
+\end{figure*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\MakeUppercase{Analysis of the Conduction Losses Considering the Current Ripple}}%\label{sec:xxxx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The instantaneous conduction losses $p_X$ over a two-terminals circuit element $X$ represented by a resistance $r_X$ and a voltage drop $v_X$ in this work is defined as
+%
+\begin{equation}
+p_X=r_X i_X^2+v_X  i_X,
+\end{equation}  where $i_X$ is the current across the element. An useful information regarding the conduction losses is its local average value \cite{Livros-Erickson}, which for a signal $y$ over a period $T$ is defined by
+%
+\begin{equation}
+\left\langle y \right\rangle_{T}=\dfrac{1}{T}\int_{t-T}^{t}yd\tau.
+\end{equation} Thus, the local average value of the conduction losses over a switching period $T_s$ if  $r_X$ and $v_X$ are constant over a switching period is
+%
+\begin{equation}
+\label{eq:pxavg2}
+\left\langle p_X \right\rangle_{T_s}=r_X\left\langle i_X \right\rangle_{T_s,{rms}}^2+\left\langle v_X \right\rangle_{T_s}\left\langle i_X \right\rangle_{T_s},
+\end{equation} 
+%
+where $\left\langle i_X \right\rangle_{T_s,{rms}}$ is defined as the element current local rms value over a switching period \cite{Livros-Erickson}. 
+
+An important aspect to employ (\ref{eq:pxavg2}) is the shape of the switched current $i_X$. Fig.~\ref{fig2} shows an hypothetical switched current over a switching period. This current is defined as
+%
+\begin{equation}
+i_X = \left\langle i_X \right\rangle_{T_s} + \Delta i_X,
+\end{equation} where $\Delta i_X$ is the element current ripple peak-to-peak value. In this case, the current local average value does not change over a switching period and the average ripple is null. 
+% 
+\begin{figure}[tp!]
+	\centering
+	\includegraphics[scale=1]{figuras/fig2}
+	\caption{(a) Switched current $i_X$ waveform in a switching period and its definitions; (b) Current ripple rms value and auxiliary variables; and, (c) Current ripple equations for each transition. The times $T_x$, $T_y$ and $T_z$ are the durations interval associated with the vector $\vec{V}_x$, $\vec{V}_y$ and $\vec{V}_z$, respectively, which are hypothetical voltage space vectors applied that generate the current $i_X$. The bar $|$ is used to associate a correspondant definition for that variable, e.g., $\Delta i|_{\vec{V}_x}$ indicates the current ripple obtained with the application of the voltage vector $\vec{V}_x$.}
+	\label{fig2}
+\end{figure}
+
+In order to highlight the differences between the computed power losses taking into account the current ripple, the terms in (\ref{eq:pxavg2}) are expanded as $\left\langle p_X \right\rangle_{T_s}\!=\!p^{(r)}_{X}\!+\!p^{(v)}_{X}$, where the first term in the right hand side is the resistive losses (superscript $(r)$)
+%
+\begin{equation}
+p^{(r)}_{X}=r_X\left\langle i_X \right\rangle_{T_s,{rms}}^2=p^{(r)}_{X,sim}+p^{(r)}_{X,rip}
+\end{equation} and the second is the losses due the voltage drop (superscript $(v)$)
+%
+\begin{equation}
+p^{(v)}_{X}=\left\langle v_X \right\rangle_{T_s}\left\langle i_X \right\rangle_{T_s}=p^{(v)}_{X,sim}+p^{(v)}_{X,rip}.
+\end{equation} They are also divided into the simplified current shape (subscript $sim$) losses, which is defined as the losses that are expected not taking in account the current ripple, and the ripple losses (subscript $rip$), which is due to the current ripple. Note that ripple induced losses in the voltage drop is always null since $\left\langle \Delta i_X \right\rangle_{T_s}\!=\!0$. And, if half switching period was considered in the averages, the net expected result would be the same in a switching period.
+
+The resistive simplified losses are computed with
+%
+\begin{equation}
+p^{(r)}_{X,sim}=r_X \left( \dfrac{1}{T_s} \int_{t-T_s}^{t} (\left\langle i_X \right\rangle_{T_s})^2d\tau \right)=r_X\left\langle  {i}_{X,sim} \right\rangle_{T_s,{rms}}^2,
+\end{equation} where $\left\langle  {i}_{X,sim} \right\rangle_{T_s,{rms}}$ is the rms current value if no current ripple was considered. And, the resistive ripple induced losses with
+%
+\begin{equation}
+\label{eq:pxrip}
+p^{(r)}_{X,rip}=r_X \left( \dfrac{1}{T_s} \int_{t-T_s}^{t} (\Delta i_X)^2d\tau\right)=r_X \left\langle \Delta i_X \right\rangle_{T_s,{rms}}^2.
+\end{equation} where $\left\langle \Delta i_X \right\rangle_{T_s,{rms}}$ is the element current ripple rms value over a switching period.
+
+Finnaly, after determining the losses expressions over the switching period, it is possible to determine the conductions losses over a line period $T_e$, which is the effective losses to design and to evaluate the converter components. This can be computed with
+%
+\begin{equation}
+P_X=\dfrac{1}{T_e}\int_{t-T_e}^{T_e}\left\langle p_X \right\rangle_{T_s} d\tau.
+\end{equation} The main difference with the simplified losses is the resistive term due to the current ripple rms value, which is defined over a line period by
+%
+\begin{equation}
+\Delta I_{X,{rms}}=\sqrt{\dfrac{1}{T_e}\int_{t-T_e}^{T_e} \left\langle \Delta i_X \right\rangle_{T_s,{rms}}^2 d\tau}.
+\end{equation} 
+
+In the following, the current ripple will be evaluated for different circuit components, i.e., line inductor, MOSFET based VSC and IBGT/diode based VSC,  of the VSC and how it changes regarding the employed modulation strategy. In this version of the paper it is only presented for the modulations, namely, SVM and DPWM~1 \cite{Livros-Lipo}, whereas other modulation strategies will be considered in the final version of this work.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\MakeUppercase{Current Ripple Analysis for Different PWM Strategies}}%\label{sec:xxxx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Current Ripple in the Phase Current}
+	
+Let, exemplarily, the circuit for voltage vector $\vec{V}_1$ as decipted in Fig.~\ref{fig3}(a). In order to analyze the current ripple of phase current $i_a$, the equivalent Thevenin circuit for phase $a$ has been determined as shown in Fig.~\ref{fig3}(b). The differential equation of this circuit is given by
+%
+\begin{equation}
+\label{eq:V0}
+\dfrac{3}{2}Ri_a+\dfrac{3}{2}L\dfrac{di_a}{dt}=e_a-\dfrac{(e_b+e_c)}{2}-V_{dc}.
+\end{equation} In order to evaluate the current ripple, it is supposed that ${di_a}/{dt}\!\approx\! {\Delta i_a}/{\Delta t}$ and $i_a\!=\!\left\langle i_a\right \rangle_{T_s}\!+\!\Delta i_a$. Thus, (\ref{eq:V0}) can be rewritten as
+%
+\begin{equation}
+\Delta i_a = \dfrac{1}{3(R\Delta t +L) }\left[ 2e_a - e_b-e_c-2V_{dc}-3R\left\langle i_a\right \rangle_{T_s}\right] \Delta t,
+\end{equation} where $\Delta t$ is the duration time which vector $\vec{V}_1$ has been applied, i.e., $\Delta t\!=\!\Delta t_1\!=\!d_1T_s$. Considering this methodology, in Fig.~\ref{fig3}(c) a table  is presented with the current ripple for all voltage vectors, which vectors are shown in the voltage space vector of Fig.~\ref{fig1}(c).
+\!\!\!
+% 
+\begin{figure}[bp!]
+	\centering
+	\includegraphics[scale=0.98]{figuras/fig3}
+	\caption{(a) Equivalent circuit for voltage vector $\vec{V}_1$; (b) Equivalent Thevenin circuit for voltage vector $\vec{V}_1$; and, (c) Table with voltage vectors and their correspondants current ripple values of $i_a$, {where $\Delta t_j$ is the correspondent duration time of the voltage vector.}}
+	\label{fig3}
+\end{figure}
+
+%\begin{table}
+%\caption{ \footnotesize \textsc{Voltage Vectors and Correspondants Current Ripples} }
+%\footnotesize
+%\begin{center}
+%\begin{tabular}{c | c  }
+%\hline
+%Voltage Vector & $\Delta i_a$ \\
+%\hline
+%\hline
+%$\vec{V}_0$ & $\dfrac{1}{3(R\Delta t +L) }\left[ 2e_a - e_b-e_c-3R\left\langle i_a\right \rangle_{T_s}\right] \Delta t$ \\
+%\hline
+%$\vec{V}_1$ & $\dfrac{1}{3(R\Delta t +L) }\left[ 2e_a - e_b-e_c-2V_{dc}-3R\left\langle i_a\right \rangle_{T_s}\right] \Delta t$ \\
+%\hline
+%$\vec{V}_2$ & $\dfrac{1}{3(R\Delta t +L) }\left[ 2e_a - e_b-e_c-V_{dc}-3R\left\langle i_a\right \rangle_{T_s}\right] \Delta t$ \\
+%\hline
+%$\vec{V}_3$ & $\dfrac{1}{3(R\Delta t +L) }\left[ 2e_a - e_b-e_c+V_{dc}-3R\left\langle i_a\right \rangle_{T_s}\right] \Delta t$ \\
+%\hline
+%$\vec{V}_4$ & $\dfrac{1}{3(R\Delta t +L) }\left[ 2e_a - e_b-e_c+2V_{dc}-3R\left\langle i_a\right \rangle_{T_s}\right] \Delta t$ \\
+%\hline
+%$\vec{V}_5$ & $\dfrac{1}{3(R\Delta t +L) }\left[ 2e_a - e_b-e_c+V_{dc}-3R\left\langle i_a\right \rangle_{T_s}\right] \Delta t$ \\
+%\hline
+%$\vec{V}_6$ & $\dfrac{1}{3(R\Delta t +L) }\left[ 2e_a - e_b-e_c-V_{dc}-3R\left\langle i_a\right \rangle_{T_s}\right] \Delta t$ \\
+%\hline
+%\end{tabular}
+%\end{center}
+%\label{tab:vectors}
+%\end{table}
+
+For a given modulation strategy, the current ripple rms value over a switching period is a composition of the applied voltage vectors. This is formulated as
+%
+\begin{equation}
+\left\langle \Delta i \right\rangle_{T_s,rms}=\sqrt{\dfrac{1}{T_s} \left\{ \int_{\Delta t_1}[\Delta i_{1}(\tau)]^2 d\tau+ \int_{\Delta t_2} [\Delta i_{2}(\tau)]^2 d\tau +  \cdots + \int_{\Delta t_n} [\Delta i_{n}(\tau)]^2 d\tau \right\}},
+\end{equation} where $\Delta i_n(t)$ is the current ripple function for a given voltage vector applied during the time interval between $\Delta t_n$ and $\Sigma_n{\Delta t_n}\!=\!T_s$. The current ripple rms value over a switching period of the exemplary current in Fig.~\ref{fig2}(a) is given by Fig.~\ref{fig2}(b), where the expressions of the current ripple for each part are shown in Fig.~\ref{fig2}(c).
+
+Based on the presented procedure and considering the pulse patterns of the PWM strategies SVM and DPWM1 \cite{Livros-Lipo}, the current ripple rms values over a switching period have been determined. The local expressions for SVM are
+%
+% SPWM, SVM, DPWM0, DPWM1, DPWM2 and DPWM3
+%
+%DPWM0
+%%
+%\begin{equation}
+%\begin{array}{c c l}
+% \left\langle \Delta i_a \right \rangle_{T_s,rms}^2 &=& i_m^2d_0'/3 +(i_m^2+i_n^2+i_mi_n)d_1'/3+ i_n^2d_2'/3\\
+% i_m&=&(\Delta i_a|_{\vec{V}'_0})/2\\
+% i_n&=&-(\Delta i_a|_{\vec{V}'_2})/2\\
+%\end{array}
+%\end{equation}
+%
+%DPWM1
+%%
+%\begin{equation}
+%\begin{array}{c c l}
+% \left\langle \Delta i_a \right \rangle_{T_s,rms}^2 &=& i_m^2d_0'/3 +i_n^2d_1'/3+ (i_m^2+i_n^2+i_mi_n)d_2'/3, \textrm{for the first half of each sector}\\
+% i_m&=&(\Delta i_a|_{\vec{V}'_0})/2\\
+% i_n&=&-(\Delta i_a|_{\vec{V}'_1})/2\\
+% \left\langle \Delta i_a \right \rangle_{T_s,rms}^2 &=& i_m^2d_0'/3 +(i_m^2+i_n^2+i_mi_n)d_1'/3+ i_n^2d_2'/3, \textrm{for the second half of each sector}\\\
+% i_m&=&(\Delta i_a|_{\vec{V}'_0})/2\\
+% i_n&=&-(\Delta i_a|_{\vec{V}'_2})/2\\
+%\end{array}
+%\end{equation}
+%
+%DPWM2
+%%
+%\begin{equation}
+%\begin{array}{c c l}
+% \left\langle \Delta i_a \right \rangle_{T_s,rms}^2 &=& i_m^2d_0'/3 +i_n^2d_1'/3+ (i_m^2+i_n^2+i_mi_n)d_2'/3\\
+% i_m&=&(\Delta i_a|_{\vec{V}'_0})/2\\
+% i_n&=&-(\Delta i_a|_{\vec{V}'_1})/2\\
+%\end{array}
+%\end{equation}
+%
+%DPWM3
+%%
+%\begin{equation}
+%\begin{array}{c c l}
+% \left\langle \Delta i_a \right \rangle_{T_s,rms}^2 &=& i_m^2d_0'/3 +(i_m^2+i_n^2+i_mi_n)d_1'/3+ i_n^2d_2'/3, \textrm{for the first half of each sector}\\\
+% i_m&=&(\Delta i_a|_{\vec{V}'_0})/2\\
+% i_n&=&-(\Delta i_a|_{\vec{V}'_2})/2\\
+% \left\langle \Delta i_a \right \rangle_{T_s,rms}^2 &=& i_m^2d_0'/3 +i_n^2d_1'/3+ (i_m^2+i_n^2+i_mi_n)d_2'/3, \textrm{for the second half of each sector}\\
+% i_m&=&(\Delta i_a|_{\vec{V}'_0})/2\\
+% i_n&=&-(\Delta i_a|_{\vec{V}'_1})/2\\
+%\end{array}
+%\end{equation}
+%
+% SVM
+\begin{equation}
+\begin{array}{c c l}
+ \left\langle \Delta i_a \right \rangle_{T_s,rms}^2 &=& i_m^2d_0'/3 +(i_m^2+i_n^2+i_mi_n)d_1'/3+ (i_m^2+i_n^2-i_mi_n)d_2'/3, \textrm{for odd sextants},\\
+ \left\langle \Delta i_a \right \rangle_{T_s,rms}^2 &=& i_m^2d_0'/3 +(i_m^2+i_n^2-i_mi_n)d_1'/3+ (i_m^2+i_n^2+i_mi_n)d_2'/3, \textrm{for even sextants},\\
+ i_m&=&(\Delta i_a|_{\vec{V}'_0})/4,\\
+ i_n&=&i_m+(\Delta i_a|_{\vec{V}'_1})/2,\\
+\end{array}
+\end{equation} and for DPWM1 are
+% DPWM 1
+\begin{equation}
+\begin{array}{c c l}
+ \left\langle \Delta i_a \right \rangle_{T_s,rms}^2 &=& i_m^2d_0'/3 +i_n^2d_1'/3+ (i_m^2+i_n^2+i_mi_n)d_2'/3, \textrm{for the first half of each sextant},\\
+ i_m&=&(\Delta i_a|_{\vec{V}'_0})/2,\\
+ i_n&=&-(\Delta i_a|_{\vec{V}'_1})/2,\\
+ \left\langle \Delta i_a \right \rangle_{T_s,rms}^2 &=& i_m^2d_0'/3 +(i_m^2+i_n^2+i_mi_n)d_1'/3+ i_n^2d_2'/3, \textrm{for the second half of each sextant},\\\
+ i_m&=&(\Delta i_a|_{\vec{V}'_0})/2,\\
+ i_n&=&-(\Delta i_a|_{\vec{V}'_2})/2,\\
+\end{array}
+\end{equation} where the sextants are defined as in Fig.~\ref{fig1}(c), the duty-cycle functions $d'_1$ and $d'_2$ are given in Tab.~\ref{tab:dfunctions}, and the value of the zero sequence signal is $d'_0\!=\!1\!-\!d_1'\!-\!d_2'$.	In Tab.~\ref{tab:dfunctions} the $\alpha\beta$ duty-cycle functions are given by an ac current control system or, if  a linear load is considered, by an open-loop modulator.  {Considering the steady state single-phase equivalent  circuit of the converter referred to the ac-side shown in Fig.~\ref{fig5}(a), where all variables are sinusoidal and defined by}
+%
+\begin{equation}
+\vec{e}_{abc}=E_{pk}[ \begin{array}{ c c c} \cos(\omega_e t) &\cos(\omega_e t\!-\!2\pi/3) &\cos(\omega_e t\!+\!2\pi/3) \end{array} ]^T,
+\end{equation}
+%
+\begin{equation}
+\vec{v}_{abc}=V_{pk}[\begin{array}{c c c}\cos(\omega_e t\!-\!\phi_v) &\cos(\omega_e t\!-\!\phi_v\!-\!2\pi/3) &\cos(\omega_e t\!-\!\phi_v\!+\!2\pi/3)\end{array}]^T
+\end{equation} and
+%
+\begin{equation}
+ \langle\vec{ i} _{abc}\rangle _{T_s} =I_{pk}[\begin{array}{c c c}\cos(\omega_e t\!-\!\phi_i) &\cos(\omega_e t\!-\!\phi_i\!-\!2\pi/3) &\cos(\omega_e t\!-\!\phi_i\!+\!2\pi/3)\end{array}]^T,
+\end{equation} where $E_{pk}$, $V_{pk}$ and $I_{pk}$ are the  peak values of the input phase voltage, converter phase voltage and phase current, respectively; $\omega_e\!=\!2\pi f_e$ and $f_e\!=\!1/T_e$ are the electrical frequencies; the $abc$ vectors contains information regarding all phases, as given by $\vec{x}_{abc}\!=\![x_a\ x_b\ x_c]^T$; and, $\phi_v$ and $\phi_i$ are the {displacement angles} between the input voltage and the converter voltage and phase current, respectively. These relations are illustrated by the phasor diagram in Fig.~\ref{fig5}(b). Thus, the modulation functions can be determined with $\vec{m}_{abc}\!=\!\vec{v}_{abc}/V_{dc}$. Employing the Clarke Transformation shown in Fig.~\ref{fig5}(c) and considering $V_{pk}=(M/\sqrt{3})V_{dc}$, where  $M$ is the modulation index, whose range is between 0 and 1, the modulation functions in the $\alpha\beta$ plane are given by
+%
+\begin{equation}
+\vec{m}_{\alpha\beta}=(M/\sqrt{3})[\begin{array}{c c}\cos(\omega_e t\!-\!\phi_v) &\sin(\omega_e t\!-\!\phi_v)\end{array}]^T,
+\end{equation} which the duty-cycle functions are related with $\vec{d}_{\alpha\beta}\!=\!\vec{m}_{\alpha\beta}$. In Fig.~\ref{fig4} the main signals of each modulation strategy are illustrated for a line period, where $d_a\!=\!m_a\!+\!d_0$ is the duty-cycle function of $S_{ap}$ (and, for the equivalent switch $S_a$ as shown in Fig.~\ref{fig3}(a)).
+%
+\begin{figure}[t!]
+	\centering
+	\includegraphics[scale=0.95]{figuras/fig5}
+	\caption{{(a) Steady state single-phase equivalent circuit of the converter referred to the ac-side; (b) Phasor diagram for steady state operation of (a); and, (c) Clarke Transformation matrix used in this work. }}
+	\label{fig5}
+\end{figure}
+% 
+\begin{table}
+\caption{ \footnotesize \textsc{Relationship between the duty-cycle functions of the vectors and the $\alpha\beta$ duty-cycle functions} }
+\footnotesize
+\begin{center}
+\begin{tabular}{c | c | c}
+\hline
+\multirow{2}{*}{Sextants}  & \multicolumn{2}{c}{Vector's Duty-cycle Functions} \\
+\cline{2-3}
+ & $d'_1$ & $d'_2$\\
+\hline
+$S_\textrm{I}$ & $d_1=(3/2)( d_\alpha-{1}/{\sqrt{3}d_\beta} )$ & $d_2=\sqrt{3}d_\beta$ \\
+\hline
+$S_\textrm{II}$ & $d_2=(3/2)( d_\alpha+{1}/{\sqrt{3}d_\beta} )$ & $d_3=-(3/2)( d_\alpha-{1}/{\sqrt{3}d_\beta} )$\\
+\hline
+$S_\textrm{III}$ & $d_3=\sqrt{3}d_\beta$ & $d_4=-(3/2)( d_\alpha+{1}/{\sqrt{3}d_\beta} )$\\
+\hline
+$S_\textrm{IV}$ & $d_4=-(3/2)( d_\alpha-{1}/{\sqrt{3}d_\beta} )$ & $d_5=-\sqrt{3}d_\beta$\\
+\hline
+$S_\textrm{V}$ & $d_5=-(3/2)( d_\alpha+{1}/{\sqrt{3}d_\beta} )$ & $d_6=(3/2)( d_\alpha-{1}/{\sqrt{3}d_\beta} )$\\
+\hline
+$S_\textrm{VI}$ & $d_6=-\sqrt{3}d_\beta$ & $d_1=(3/2)( d_\alpha+{1}/{\sqrt{3}d_\beta} )$\\
+\hline
+\end{tabular}
+\end{center}
+\label{tab:dfunctions}
+\end{table}
+%
+\begin{figure}[tp!]
+	\centering
+	\includegraphics[scale=0.95]{figuras/fig4}
+	\caption{Main modulation signals: (a) SVM; and, (b) DPWM1.}
+	\label{fig4}
+\end{figure}
+
+An analytical approximation of the phase current ripple rms value can be determined considering that $R\!\approx\!0$, $\vec{v}_{abc}\!=\!\vec{e}_{abc}$ and $\phi_i\!=\!0$, thus for SVM
+%
+\begin{equation}
+\Delta I_{a,rms}=\dfrac{MV_{dc}}{48Lf_s}\sqrt{\dfrac{24\pi-128M+9M^2(4\pi-3\sqrt{3})}{3\pi}}
+\end{equation} and for DPWM~1
+%
+\begin{equation}
+\Delta I_{a,rms}=\dfrac{MV_{dc}}{24Lf_s}\sqrt{\dfrac{48\pi-8M(8+15\sqrt{3})+9M^2(4\pi+\sqrt{3})}{6\pi}}.
+\end{equation} {These theoretical results are in agreement with the results presented in \cite{Kolar-06, Lipo-02}, where  experimental results \cite{Lipo-02} are also shown. A more detailed analysis is not the objective of this work, whereas it might be necessary to employ numerical methods in order to determine the current ripple rms values for a given generic application. }
+
+\subsection{Current Ripple in the Power Semicondutors}
+
+Considering the implementation of the switches in the VSC is SiC MOSFET based, where synchronous rectification is considered as the gate-drive pulse signal strategy, i.e., the current flows through the MOSFET channel. The switch model is reduced as a resistor $R_{S,on}$ for state 1 and as an open-circuit for state 0. Thus, the current that flows throught the switch $S_{ap}$ is given by $i_S\!=\!i_a. s_{ap}$, where $s_{ap}$ is the switching function of $S_{ap}$ (cf. Fig.~\ref{fig1}(a)) given by the comparison of the modulation function $d_a$ and the carrier. Formulating the integral version of $i_S$, it can be shown, for all considered pwm strategies, that
+%
+\begin{equation}
+I_{S,rms}=\sqrt{\dfrac{I_{pk}^2}{4}+\dfrac{\Delta I_{a,rms}^2}{{2}}},
+\end{equation} i.e., it is the total rms value of the phase current divided by $\sqrt{2}$. 
+
+In the final version of this work the implementation of the switches with IBGTs and anti-parallel diodes will be considered.
+
+%\subsubsection{Power MOSFET with Synchronous Rectification}
+
+%\subsubsection{Power IGBT}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{{\MakeUppercase{Analysis of the Results}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A comparison of the proposed method with the simplified method, which does not take into account the current ripple, and simulations results on switched models is performed in order to evaluate the accuracy of the presented methodology. The system parameters are given in the caption of Fig.~\ref{fig6}, where SiC MOSFETs have been considered to implement the switches (CREE CMF20120D) with $R_{S,on}\!=\!0.11$~$\Omega$. The simulated values and the theoretical results of the phase current ripple rms value are very close  in all operation conditions (the error is less than $0.1\%$ for SVM and $0.4\%$ for DPWM~1). Thus, only the simulation results are given as shown in Fig.~\ref{fig6}(a) for both considered PWM strategies. The converter losses are the most important results obtained from the current rms values. A comparison between the methodologies are presentend in Fig.~\ref{fig6}(b)and Fig.~\ref{fig6}(c) for SVM and DPWM~1, respectively. It can be seen that the simplified results provides close results, but the differences with the simulation results are bettween $1.1\%$ and $3.6\%$ for SVM; and, $2.6\%$ and $11.5\%$ for DPWM~1. The results are significantly improved considering the proposed methodology, where all results present an error less than $0.6\%$.
+%
+\begin{figure}[tp!]
+	\centering
+	\includegraphics[scale=1.0]{figuras/fig6}
+	\caption{(a) Phase current ripple rms value for the simulated conditions with SVM and DPWM 1. The percentual ondulation is determined with $\Delta i_a \%\!=\!(\max(\Delta i_a)/I_{pk}) 100\%$; Converter losses for (b) SVM; and, (c) DPWM 1. The converter has been simulated considering the following parameters: $f_e\!=\!60$~Hz; $R\!=\!1$~$\mu\Omega$;  $L\!=\!460$~$\mu$H; $V_{dc}\!=\!760$~V; $f_s\!=\!19.96$~kHz ($f_s$ for SVM and $(3/2)f_s$ for DPWM 1); $E_{pk}\!=\!MV_{dc}/\sqrt{3}$; and, the rated condition of 10~kW is determined at $M\!=\!0.7$ and $I_{pk}\!=\!21.5$~A.}
+	\label{fig6}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\MakeUppercase{Conclusions}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{This works presented a methodology to improve the calculation of the current ripple rms value in the VSC with different PWM strategies. It has been shown that the semiconductor losses estimations  can also be improved considering simpler results in the analysis of the current ripple.  The final version of ths work will be enriched with further information. }
+
+
+% if have a single appendix:
+%\section*{\MakeUppercase{A\footnotesize{ppendix}} --- Minimum Inductance for a Given Attenuation}\label{sec:app_min_ind}
+% or
+%\appendix  % for no appendix heading
+% do not use \section anymore after \appendix, only \section*
+% is possibly needed
+
+% use appendices with more than one appendix
+% then use \section to start each appendix
+% you must declare a \section before using any
+% \subsection or using \label (\appendices by itself
+% starts a section numbered zero.)
+%
+%\appendices
+%\section{Proof of the First Zonklar Equation}
+%Appendix one text goes here.
+
+% you can choose not to have a title for an appendix
+% if you want by leaving the argument blank
+%\section{}
+%Appendix two text goes here.
+
+
+%\balance
+
+
+\bibliographystyle{IEEEtran} %Style of Bibliography: plain / apalike / amsalpha / alpha / unsrt / IEEEtran / ...
+
+\bibliography{References}
+
+
+
+% biography section
+% 
+% If you have an EPS/PDF photo (graphicx package needed) extra braces are
+% needed around the contents of the optional argument to biography to prevent
+% the LaTeX parser from getting confused when it sees the complicated
+% \includegraphics command within an optional argument. (You could create
+% your own custom macro containing the \includegraphics command to make things
+% simpler here.)
+%\begin{biography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
+% or if you just want to reserve a space for a photo:
+
+%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{Photo_Marcelo_Heldwein.eps}}]{Marcelo Lobo Heldwein}
+%\end{IEEEbiography}
+%
+%\begin{biographynophoto}{\underline{Laurinda ...}}
+%Here...
+%\end{biographynophoto}
+
+%\begin{biographynophoto}{\underline{Marcelo Lobo Heldwein}}  received the B.S. and M.S. degrees in electrical engineering from the Federal University of Santa Catarina, Florianopolis, Brazil, in 1997 and 1999, respectively, and his Ph.D. degree from the Swiss Federal Institute of Technology (ETH Zurich), Zurich, Switzerland, in 2007.
+%
+%He is currently working as a Postdoctoral Fellow at the Power Electronics Institute (INEP), Federal University of Santa Catarina (UFSC), Florian\'opolis, Brazil.
+%
+%From 1999 to 2001, he was a Research Assistant with the Power Electronics Institute, Federal University of Santa Catarina. From 2001 to 2003, he was an Electrical Design Engineer with Emerson Energy Systems, in S„o JosÈ dos Campos, Brazil and in Stockholm, Sweden.
+%
+%His research interests include power factor correction techniques, static power converters and electromagnetic compatibility.
+%
+%Mr. Heldwein is currently a member of the Brazilian Power Electronic Society (SOBRAEP) and of the IEEE.
+%
+%\end{biographynophoto}
+
+
+
+
+%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{Photo_Johann_Kolar.eps}}]{Johann W. Kolar}
+%\end{IEEEbiography}
+
+% insert where needed to balance the two columns on the last page with biographies
+%\newpage
+
+% if you will not have a photo at all:
+%\begin{IEEEbiographynophoto}{Jane Doe}
+%Biography text here.
+%\end{IEEEbiographynophoto}
+
+% You can push biographies down or up by placing
+% a \vfill before or after them. The appropriate
+% use of \vfill depends on what kind of text is
+% on the last page and whether or not the columns
+% are being equalized.
+
+%\vfill
+
+% Can be used to pull up biographies so that the bottom of the last one
+% is flush with the other column.
+%\enlargethispage{-5in}
+
+\end{document}
+
+% Retificadores PFC multiniveis baseados em celula de comutaÁao de multiplos estados tem se mostrado uma alternativa potencial onde alto rendimento, alta potÍncia e elevada densidade de potÍncias„o desejados. O emprego de celulas de comutaÁao de multiplos estados permite uma Ûtima distribuiÁao de esforÁos de corrente, ao mesmo tempo em que a frequencia aparente gerada pelo conversor (que depende da frequencia de comutaÁao e do n;umero de cÈlulas de comutaÁao) È d
