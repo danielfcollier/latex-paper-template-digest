@@ -1,4 +1,4 @@
-# Template for IEEE Conferences
+# Template for the Digest of IEEE Conferences
 
 Figures not included. It works well with ".eps", ".png", and ".pdf" files.
 
